@@ -23,14 +23,10 @@ app.use('/proxy', async (req, res) => {
     });
     return data.pipe(res);
   } catch (err) {
-    res.status(err?.code || 500).json({
+    res.json({
       message: err?.message || 'Bad request',
     });
   }
-});
-
-app.use('/', (req, res) => {
-  res.send('hiii');
 });
 
 app.listen(port);
