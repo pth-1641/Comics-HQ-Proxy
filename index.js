@@ -9,21 +9,23 @@ const port = process.env.PORT || 8080;
 const referer = process.env.REFERER_URL;
 app.use(express.json());
 
-app.use('/', async (req, res) => {
+app.use('/proxy', async (req, res) => {
   try {
     const { src } = req.query;
-    const response = await axios({
+    const { data } = await axios({
       method: 'GET',
-      url: file,
+      url: src,
       responseType: 'stream',
       headers: {
         Accept: '*/*',
         referer,
       },
     });
-    response.data.pipe(res);
+    return data.pipe(res);
   } catch (err) {
-    console.error(err);
+    res.status(err?.code || 500).json({
+      message: err?.message || 'Bad request',
+    });
   }
 });
 
