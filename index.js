@@ -21,7 +21,7 @@ app.use('/', async (req, res) => {
         referer,
       },
     });
-    data.pipe(res);
+    return data.pipe(res);
   } catch (err) {
     res.json({
       message: err?.message || 'Bad request',
