@@ -21,7 +21,8 @@ app.use('/proxy', async (req, res) => {
         referer,
       },
     });
-    return data.pipe(res);
+    // return data.pipe(res);
+    return res.send('hii');
   } catch (err) {
     res.status(err?.code || 500).json({
       message: err?.message || 'Bad request',
