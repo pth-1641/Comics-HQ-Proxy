@@ -9,7 +9,7 @@ const port = process.env.PORT || 8080;
 const referer = process.env.REFERER_URL;
 app.use(express.json());
 
-app.use('/proxy', async (req, res) => {
+app.use('/', async (req, res) => {
   try {
     const { src } = req.query;
     const { data } = await axios({
