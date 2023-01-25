@@ -21,13 +21,16 @@ app.use('/proxy', async (req, res) => {
         referer,
       },
     });
-    // return data.pipe(res);
-    return res.send('hii');
+    return data.pipe(res);
   } catch (err) {
     res.status(err?.code || 500).json({
       message: err?.message || 'Bad request',
     });
   }
+});
+
+app.use('/', (req, res) => {
+  res.send('hiii');
 });
 
 app.listen(port);
